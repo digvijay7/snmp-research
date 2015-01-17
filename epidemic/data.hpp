@@ -28,10 +28,13 @@ namespace sn{
         pqxx::work w(*c);
         std::string stmt = "SELECT DISTINCT client_id FROM logs WHERE ts>= to_timestamp('" + from_time + "','yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('"+to_time +
         "','yyyy-mm-dd hh24:mi:ss') and type != 3;";
+        std::cout<<"Making Query:"<<stmt<<std::endl;
         pqxx::result res = w.exec(stmt);
         for(int i = 0;i<res.size();i++){
           client_ids.push_back( res[i][0].as<int>() );
+          std::cout<<res[i][0]<<",";
         }
+        std::cout<<std::endl;
       }
       catch(std::exception &e){
         std::cerr << e.what() <<std::endl;
@@ -45,6 +48,7 @@ namespace sn{
         pqxx::work w(*c);
         std::string stmt = "SELECT device_id,client_id,ts,type FROM logs WHERE ts>= to_timestamp('" + from_time + "','yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('"+to_time +
         "','yyyy-mm-dd hh24:mi:ss') and type != 3 ORDER BY ts;";
+        std::cout<<"Making Query:"<<stmt<<std::endl;
         pqxx::result res = w.exec(stmt);
         for(int i = 0;i<res.size();i++){
           int ap_id = res[i][0].as<int>();
