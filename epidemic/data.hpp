@@ -26,8 +26,8 @@ namespace sn{
     void get_client_ids(std::string from_time, std::string to_time,std::vector<int> & client_ids){
       try{
         pqxx::work w(*c);
-        std::string stmt = "SELECT DISTINCT client_id FROM logs WHERE ts>= to_timestamp('" + from_time + "','yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('"+to_time +
-        "','yyyy-mm-dd hh24:mi:ss') and type != 3;";
+        std::string stmt = "SELECT DISTINCT client_id FROM logs JOIN label ON device_id = uid WHERE ts>= to_timestamp('" + from_time + "','yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('"+to_time +
+        "','yyyy-mm-dd hh24:mi:ss') and building='Academic' and floor = '2' and wing='C' and room='C23' and type != 3;";
         std::cout<<"Making Query:"<<stmt<<std::endl;
         pqxx::result res = w.exec(stmt);
         for(int i = 0;i<res.size();i++){
