@@ -20,9 +20,9 @@ namespace sn{
     }
     log(int a,int c,long int f, int t){ap_id = a;cli_id = c;ts = f;type = t;}
     std::string get_time(){
-      tm tm = std::localtime(&ts);
+      tm * tm = std::localtime(&ts);
       char buf[50];
-      strftime(buf,50,"%Y-%m-%d %H:%M:%S",&tm);
+      strftime(buf,50,"%Y-%m-%d %H:%M:%S",tm);
       return std::string(buf);
     }
     
