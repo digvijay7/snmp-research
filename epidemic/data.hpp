@@ -66,7 +66,7 @@ namespace sn{
         ss << ",'yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('" << to_time;
         ss << "','yyyy-mm-dd hh24:mi:ss') and ";
         ss << " client_id IN " <<to_string(client_ids);
-        ss << "type != 3 ORDER BY ts;";
+        ss << " and type != 3 ORDER BY ts;";
         std::cout<<"Making Query:"<<ss.str()<<std::endl;
         pqxx::result res = w.exec(ss.str());
         for(int i = 0;i<res.size();i++){
