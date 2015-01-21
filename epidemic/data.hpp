@@ -1,6 +1,7 @@
 #include<utility>
 #include<pqxx/pqxx>
 #include<vector>
+#include<sstream>
 
 namespace sn{
   class data {
@@ -41,15 +42,33 @@ namespace sn{
       }
     }
 
+    std::string to_string(std::vector<int> & client_ids){
+      std::stringstream ss;
+      ss << "{";
+      for(int i=0;i<client_ids.size();i++){
+        if(i!=client_ids.size()-1){
+          ss << client_ids[i] <<",";
+        }
+        else{
+          ss << client_ids[i];
+        }
+      }
+      ss << "}";
+      return ss.str();
+    }
 
-  
-    void get_data(std::string from_time, std::string to_time,std::vector<log> & all_logs){
+    void get_data(std::string from_time, std::string to_time,std::vector<log> & all_logs,std::vector<int> & client_ids){
       try{
         pqxx::work w(*c);
-        std::string stmt = "SELECT device_id,client_id,ts,type FROM logs WHERE ts>= to_timestamp('" + from_time + "','yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('"+to_time +
-        "','yyyy-mm-dd hh24:mi:ss') and type != 3 ORDER BY ts;";
-        std::cout<<"Making Query:"<<stmt<<std::endl;
-        pqxx::result res = w.exec(stmt);
+        std::stringstream ss;
+        ss << "SELECT device_id,client_id,ts,type FROM logs WHERE";
+        ss << " ts>= to_timestamp('"<< from_time + "'";
+        ss << ",'yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('" << to_time;
+        ss << "','yyyy-mm-dd hh24:mi:ss') and ";
+        ss << " client_id IN " <<to_string(client_ids);
+        ss << "type != 3 ORDER BY ts;";
+        std::cout<<"Making Query:"<<ss.str()<<std::endl;
+        pqxx::result res = w.exec(ss.str());
         for(int i = 0;i<res.size();i++){
           int ap_id = res[i][0].as<int>();
           int cli_id = res[i][1].as<int>();
