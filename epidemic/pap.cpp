@@ -208,7 +208,7 @@ namespace sn{
     // - Add bit to user class to know who has file
     // - After each iteration check how many devices have gotten the file
     // - Break if total marked users = total users who have gotten file
-    int count = 0;
+    int count = 0,old_count=0;
     // Need to seed file somewhere first
     // Seeding at first of m_users
     users[m_users[0]].receive_file(); // Incase m_users.size == 0 , exception will be thrown
@@ -224,7 +224,12 @@ namespace sn{
         vector<edge> list_of_edges = update_access_points(access_points,it,status,
         previous_access_point_id);
         if(users[it->cli_id].has_file()){
+          old_count = count;
           count += transfer_files(it->cli_id,it->ap_id,access_points,users);
+          if(old_count < count){
+            std::cout<<"At:"<<it->get_time()<<" ";
+            std::cout<<count-old_count<<" more students received the file"<<std::endl;
+          }
         }
         if(count == m_users.size()-1){ // -1 because 1 user already has the file
           std::cout<<"All users have received the file"<<std::endl;
