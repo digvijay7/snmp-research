@@ -44,7 +44,7 @@ namespace sn{
 
     std::string to_string(std::vector<int> & client_ids){
       std::stringstream ss;
-      ss << "{";
+      ss << "(";
       for(int i=0;i<client_ids.size();i++){
         if(i!=client_ids.size()-1){
           ss << client_ids[i] <<",";
@@ -53,7 +53,7 @@ namespace sn{
           ss << client_ids[i];
         }
       }
-      ss << "}";
+      ss << ")";
       return ss.str();
     }
 
