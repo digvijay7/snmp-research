@@ -16,7 +16,7 @@ int main(){
   client_ids.push_back(5704); // Pushing myself as the first marked user
                               // First user as of now is also the user who has a file
   d.get_client_ids("2015-01-15 10:00:00","2015-01-15 11:00:00",client_ids);
-  d.get_data("2015-01-15 14:00:00","2015-01-25 00:00:00",all_logs,client_ids); // read from database
+  d.get_data("2015-01-15 14:00:00","2015-02-05 00:00:00",all_logs,client_ids); // read from database
   cerr<<"Done\n";
   sn::graph g_dummy; // graph declaration. dummy g for now, as not making graph
    /* 
