@@ -31,7 +31,7 @@ int main(){
   }
   */
   cerr<<"Now processing and performing simulation!\n";
-  sn::process_n_populate(all_logs,g_dummy,client_ids);
+  sn::process_n_populate(all_logs,g_dummy,client_ids,10);
   /*  cerr<<"Now processing movements and populating graph!\n";
   int t=1;
   for(int i=0;i<10;i++){

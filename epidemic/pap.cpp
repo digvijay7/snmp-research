@@ -4,9 +4,11 @@
 namespace sn{
   // This is a helper class to maintain which device an Access Point or Client is
   // connected to and at what time.
+  // TBD: "file" has to be made a separate class
   class connected{ 
     int device_id; // Device Connected to
     long int timestamp; // Time of connection
+    long int time_file_transferred;
     bool is_it_connected,file;
     public:
     connected(){device_id=-1;timestamp=-1;is_it_connected=false;file=false;};
@@ -175,21 +177,26 @@ namespace sn{
     }
   }
   int transfer_files(int cli_id,int ap_id,connected_clients (& access_points)[15000],
-  connected (& users)[15000]){
+  connected (& users)[15000], long int time_to_transfer,std::vector<int> &clients_who_received_files){
     int count = 0; //count of devices file trasnfered to
     for(std::map<int,long int>::iterator it = access_points[ap_id].connection.begin();
     it!= access_points[ap_id].connection.end();
     it++){
-      if( ! users[it->first].has_file()){
-        users[it->first].receive_file();
-        count++;
+      if( !users[it->first].has_file()){
+        long int time_connected_together = users[it->first].connected_at() - users[cli_id].connected_at();
+        if(time_connected_together < 0) time_connected_together *= -1;
+        if(time_connected_together >= time_to_transfer){
+          users[it->first].receive_file();
+          count++;
+          clients_who_received_files.push_back(it->first);
+        }
       }
     }
     return count;
   }
 
   // Function source. Function defined in pap.hpp, as static
-  bool process_n_populate(std::vector<log> & data, graph &g,std::vector<int> & m_users){
+  bool process_n_populate(std::vector<log> & data, graph &g,std::vector<int> & m_users,long int time_to_transfer){
     using namespace std;
 
     bool marked_users[15000] = {0};
@@ -224,11 +231,19 @@ namespace sn{
         vector<edge> list_of_edges = update_access_points(access_points,it,status,
         previous_access_point_id);
         if(users[it->cli_id].has_file()){
+          vector<int> clients_who_received_files;
           old_count = count;
-          count += transfer_files(it->cli_id,it->ap_id,access_points,users);
+          count += transfer_files(it->cli_id,it->ap_id,access_points,users,time_to_transfer,clients_who_received_files);
           if(old_count < count){
             std::cout<<"At:"<<it->get_time()<<" ";
             std::cout<<count-old_count<<" more students received the file"<<std::endl;
+            for(int i=0;i<clients_who_received_files.size();i++){
+              std::cout<<clients_who_received_files[i];
+              if(i+1 != clients_who_received_files.size()){
+                std::cout<<",";
+              }
+            }
+            std::cout<<std::endl;
           }
         }
         if(count == m_users.size()-1){ // -1 because 1 user already has the file
