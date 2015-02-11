@@ -235,8 +235,9 @@ namespace sn{
           old_count = count;
           count += transfer_files(it->cli_id,it->ap_id,access_points,users,time_to_transfer,clients_who_received_files);
           if(old_count < count){
-            std::cout<<"At:"<<it->get_time()<<" ";
+            std::cout<<"[at]"<<it->get_time()<<" ";
             std::cout<<count-old_count<<" more students received the file"<<std::endl;
+            std::cout<<"[tree]"<<it->cli_id<<",";
             for(int i=0;i<clients_who_received_files.size();i++){
               std::cout<<clients_who_received_files[i];
               if(i+1 != clients_who_received_files.size()){
