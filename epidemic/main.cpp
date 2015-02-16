@@ -3,7 +3,7 @@
 #include <fstream>
 
 /*
-  Compile using: g++ main.cpp pap.cpp -lpq -lpqxx
+  Compile using: g++ main.cpp pap.cpp -lpqxx -lpq
 */
 void add_all_info(std::vector<std::pair<int,std::pair<std::string,std::string> > > & all_info, sn::graph & g);
 
@@ -15,8 +15,11 @@ int main(){
   cerr<<"Getting data from database!\n";
   client_ids.push_back(5704); // Pushing myself as the first marked user
                               // First user as of now is also the user who has a file
+  string start = "2015-01-15 14:00:00";
+  string end = "2015-02-05 00:00:00";
+  cout<<"[at]"<<start<<endl;
   d.get_client_ids("2015-01-15 10:00:00","2015-01-15 11:00:00",client_ids);
-  d.get_data("2015-01-15 14:00:00","2015-02-05 00:00:00",all_logs,client_ids); // read from database
+  d.get_data(start,end,all_logs,client_ids); // read from database
   cerr<<"Done\n";
   sn::graph g_dummy; // graph declaration. dummy g for now, as not making graph
    /* 
@@ -32,6 +35,7 @@ int main(){
   */
   cerr<<"Now processing and performing simulation!\n";
   sn::process_n_populate(all_logs,g_dummy,client_ids,10);
+  cout<<"[fin]"<<end<<endl;
   /*  cerr<<"Now processing movements and populating graph!\n";
   int t=1;
   for(int i=0;i<10;i++){
