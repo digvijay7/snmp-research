@@ -7,6 +7,15 @@
 */
 void add_all_info(std::vector<std::pair<int,std::pair<std::string,std::string> > > & all_info, sn::graph & g);
 
+long int to_time_t(std::string timestamp){
+  tm tm;
+  if(timestamp.length() > 0){
+    strptime(timestamp.c_str(),"%Y-%m-%d %H:%M:%S",&tm);
+    return mktime(&tm);
+  }
+  return -1;
+}
+
 int main(){
   using namespace std;
   sn::data d; // for using the database
@@ -17,7 +26,7 @@ int main(){
                               // First user as of now is also the user who has a file
   string start = "2015-01-15 14:00:00";
   string end = "2015-02-05 00:00:00";
-  cout<<"[at]"<<start<<endl;
+  cout<<"[at]"<<to_time_t(start)<<endl;
   d.get_client_ids("2015-01-15 10:00:00","2015-01-15 11:00:00",client_ids);
   d.get_data(start,end,all_logs,client_ids); // read from database
   cerr<<"Done\n";
@@ -35,7 +44,7 @@ int main(){
   */
   cerr<<"Now processing and performing simulation!\n";
   sn::process_n_populate(all_logs,g_dummy,client_ids,10);
-  cout<<"[fin]"<<end<<endl;
+  cout<<"[fin]"<<to_time_t(end)<<endl;
   /*  cerr<<"Now processing movements and populating graph!\n";
   int t=1;
   for(int i=0;i<10;i++){
