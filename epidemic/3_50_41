@@ -1,0 +1,106 @@
+[at]1425526200
+Making Query:SELECT device_id,client_id,ts,type FROM logs WHERE ts>= to_timestamp('2015-03-05 09:00:00','yyyy-mm-dd hh24:mi:ss') and ts <= to_timestamp('2015-03-31 00:00:00','yyyy-mm-dd hh24:mi:ss') and  client_id IN (5704,8504,6542,8330,13427,4816,7886,5165,4735,9476,13233,11929,11850,8111,11239,11687,11710,8033,6354,11692,11041,9660,7834,7363,11924,10630,9484,6890,7855,9589,7553,6131,8578,8412,5343,5054,5211,8420,8415,8094,8419,7795,8069,8100,7352,8378,4732,10729,11411,4636,8403) and type != 3 ORDER BY ts;
+[at]1425725540 1 more students received the file
+[tree]5704,7352
+[at]1425725868 1 more students received the file
+[tree]7352,13233
+[at]1425727797 1 more students received the file
+[tree]7352,11239
+[at]1425729885 1 more students received the file
+[tree]13233,11687
+[at]1425730021 1 more students received the file
+[tree]11687,11924
+[at]1425732774 1 more students received the file
+[tree]11924,5054
+[at]1425733923 1 more students received the file
+[tree]11239,9589
+[at]1425742074 1 more students received the file
+[tree]7352,10630
+[at]1425742395 1 more students received the file
+[tree]11239,8412
+[at]1425760792 1 more students received the file
+[tree]7352,7363
+[at]1425766319 1 more students received the file
+[tree]13233,8504
+[at]1425769383 1 more students received the file
+[tree]9589,7855
+[at]1425773668 1 more students received the file
+[tree]11924,8378
+[at]1425800027 1 more students received the file
+[tree]10630,9660
+[at]1425801506 1 more students received the file
+[tree]10630,7886
+[at]1425804374 1 more students received the file
+[tree]8504,8420
+[at]1425807215 1 more students received the file
+[tree]5054,8415
+[at]1425807493 1 more students received the file
+[tree]9660,8094
+[at]1425814657 1 more students received the file
+[tree]9660,9484
+[at]1425817529 1 more students received the file
+[tree]8415,7795
+[at]1425819711 1 more students received the file
+[tree]7352,11850
+[at]1425822398 1 more students received the file
+[tree]7886,8069
+[at]1425822406 1 more students received the file
+[tree]9660,11710
+[at]1425822506 1 more students received the file
+[tree]13233,4732
+[at]1425824111 1 more students received the file
+[tree]4732,8330
+[at]1425827422 1 more students received the file
+[tree]9484,8033
+[at]1425827611 1 more students received the file
+[tree]8033,4816
+[at]1425827969 1 more students received the file
+[tree]8033,7553
+[at]1425828605 1 more students received the file
+[tree]13233,8403
+[at]1425828645 1 more students received the file
+[tree]4816,8100
+[at]1425828838 1 more students received the file
+[tree]4816,6131
+[at]1425829003 1 more students received the file
+[tree]6131,11411
+[at]1425830679 1 more students received the file
+[tree]7886,6542
+[at]1425836771 1 more students received the file
+[tree]8033,4636
+[at]1425840288 1 more students received the file
+[tree]8330,5165
+[at]1425845174 1 more students received the file
+[tree]7553,6354
+[at]1425873573 1 more students received the file
+[tree]8403,11692
+[at]1425879181 1 more students received the file
+[tree]11692,8578
+[at]1425879442 1 more students received the file
+[tree]11710,4735
+[at]1425883260 1 more students received the file
+[tree]5165,9476
+[at]1425893532 1 more students received the file
+[tree]9660,6890
+[at]1425896093 1 more students received the file
+[tree]6131,7834
+[at]1425897910 1 more students received the file
+[tree]6890,11041
+[at]1425902736 1 more students received the file
+[tree]11411,10729
+[at]1425906034 1 more students received the file
+[tree]7363,5343
+[at]1425957452 1 more students received the file
+[tree]8094,8419
+[at]1425965002 1 more students received the file
+[tree]4816,5211
+[at]1426230162 1 more students received the file
+[tree]8094,13427
+[at]1426318395 1 more students received the file
+[tree]11411,8111
+[at]1426755302 1 more students received the file
+[tree]8111,11929
+All users have received the file
+Time finished: 2015-03-19 14:25:02
+50/51 received the file within the given time period
+[fin]1427740200
