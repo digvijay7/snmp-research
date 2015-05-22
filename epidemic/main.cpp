@@ -24,10 +24,11 @@ int main(){
   cerr<<"Getting data from database!\n";
   client_ids.push_back(5704); // Pushing myself as the first marked user
                               // First user as of now is also the user who has a file
-  string start = "2015-01-15 14:00:00";
-  string end = "2015-02-05 00:00:00";
+  string start = "2015-01-01 00:00:00";
+  string end = "2015-04-22 00:00:00";
   cout<<"[at]"<<to_time_t(start)<<endl;
-  d.get_client_ids("2015-01-15 10:00:00","2015-01-15 11:00:00",client_ids);
+  //d.get_client_ids("2015-01-15 10:00:00","2015-01-15 11:00:00",client_ids);
+  d.get_client_ids("../50.studs",client_ids);
   d.get_data(start,end,all_logs,client_ids); // read from database
   cerr<<"Done\n";
   sn::graph g_dummy; // graph declaration. dummy g for now, as not making graph

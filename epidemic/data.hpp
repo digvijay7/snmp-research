@@ -2,6 +2,7 @@
 #include<pqxx/pqxx>
 #include<vector>
 #include<sstream>
+#include<fstream>
 
 namespace sn{
   class data {
@@ -23,7 +24,18 @@ namespace sn{
       c->disconnect();
       delete c;
     }
-  
+    void get_client_ids(std::string file_name,std::vector<int> & client_ids){
+      try{
+        std::ifstream file_in(file_name);
+        std::string buffer;
+        while(std::getline(file_in,buffer)){
+          client_ids.push_back(std::stoi(buffer));
+        }
+      }
+      catch(std::exception &e){
+        std::cerr<< e.what()<<std::endl;
+      }
+    }
     void get_client_ids(std::string from_time, std::string to_time,std::vector<int> & client_ids){
       try{
         pqxx::work w(*c);
